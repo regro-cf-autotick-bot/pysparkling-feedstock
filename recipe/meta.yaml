@@ -7,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pysparkling-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pysparkling-{{ version }}.tar.gz
   sha256: 361ca9a11273b6be2dc5d1aff5a9ef228388ca1768244caff02b132a7102a538
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - boto >=2.36.0
     - future >=0.15
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil >=2.8.0
     - pytz >=2019.3
     - requests >=2.6.0
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/svenkreiss/pysparkling
